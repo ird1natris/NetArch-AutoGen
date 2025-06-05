@@ -3,7 +3,7 @@ from diagrams.generic.network import Router, Switch, Firewall
 from diagrams.generic.compute import Rack
 from diagrams.generic.database import SQL
 from diagrams.generic.storage import Storage
-from diagrams.generic.os import WindowsGeneral
+from diagrams.onprem.client import Users
 from diagrams.aws.network import VPNConnection, VPC, InternetGateway, PrivateSubnet, PublicSubnet
 from diagrams.aws.compute import EC2
 from diagrams.aws.database import RDS
