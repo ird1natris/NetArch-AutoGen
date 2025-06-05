@@ -1,0 +1,31 @@
+name: Generate Banking Network Diagram
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-banking:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Graphviz
+        run: sudo apt-get install -y graphviz
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Install dependencies
+        run: pip install diagrams
+
+      - name: Run Diagram Generator
+        run: python banking_network.py
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: banking-network-diagram
+          path: banking_network_diagram.png
