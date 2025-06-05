@@ -4,11 +4,11 @@ from diagrams.aws.compute import EC2, AutoScaling
 from diagrams.aws.database import RDS
 from diagrams.aws.general import Client
 from diagrams.aws.security import Shield
-from diagrams.onprem.network import VPN
+# Removed: from diagrams.onprem.network import VPN
 
 with Diagram("Advanced Network Architecture", show=False, outformat="png", filename="complex_network_diagram"):
 
-    vpn = VPN("On-Prem VPN")
+    vpn = Client("On-Prem VPN")
 
     with Cluster("VPC"):
         igw = InternetGateway("Internet Gateway")
