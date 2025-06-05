@@ -26,7 +26,7 @@ jobs:
 
       - name: Generate Multi-Tier Cloud App Diagram
         run: |
-          diagrams/multi_tier_cloud_app.py
+          python diagrams/multi_tier_cloud_app.py
 
       - name: Upload Diagram Artifact
         uses: actions/upload-artifact@v4
