@@ -3,10 +3,9 @@ from diagrams.onprem.client import Users
 from diagrams.onprem.network import Internet
 from diagrams.onprem.compute import Server
 from diagrams.onprem.database import Mysql
-from diagrams.onprem.infra import Nginx
+from diagrams.nginx import Nginx            # Fix: import Nginx from diagrams.nginx
 from diagrams.onprem.directory import ActiveDirectory
-from diagrams.onprem.security import Iptables
-from diagrams.onprem.security import Opnsense  # used in place of Router/Switch
+from diagrams.onprem.security import Iptables, Opnsense
 
 with Diagram("On-Prem Network Architecture", show=False, filename="onprem_network_architecture", direction="LR"):
 
