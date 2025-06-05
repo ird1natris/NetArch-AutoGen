@@ -2,10 +2,9 @@ from diagrams import Cluster, Diagram
 from diagrams.aws.compute import EC2, Lambda
 from diagrams.aws.database import RDS, Dynamodb
 from diagrams.aws.network import ELB, Route53, CloudFront
-from diagrams.aws.security import WAF, KMS
+from diagrams.aws.security import WAF, KMS, Shield
 from diagrams.onprem.client import Users
 from diagrams.onprem.network import Internet
-from diagrams.onprem.security import Fortinet
 from diagrams.generic.network import Firewall
 from diagrams.generic.storage import Storage
 from diagrams.saas.payment import Stripe
@@ -28,7 +27,7 @@ with Diagram("Banking Sector Network Architecture", show=False, outformat="png",
         api_servers = [EC2("API-1"), EC2("API-2")]
 
     with Cluster("DMZ"):
-        ids = Fortinet("Intrusion Detection")
+        ids = Shield("Intrusion Detection")
         proxy = EC2("Secure Proxy")
 
     with Cluster("Internal Core Banking Zone"):
@@ -60,3 +59,4 @@ with Diagram("Banking Sector Network Architecture", show=False, outformat="png",
     services >> credit_api
     services >> storage
     users >> okta >> api_lb
+
