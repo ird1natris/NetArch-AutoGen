@@ -1,0 +1,32 @@
+name: Build On-Prem Network Diagram
+
+on:
+  push:
+    paths:
+      - 'diagrams/onprem_network_architecture.py'
+  workflow_dispatch:
+
+jobs:
+  build-onprem:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install diagrams
+
+      - name: Generate On-Prem Diagram
+        run: |
+          python diagrams/onprem_network_architecture.py
+
+      - name: Upload diagram
+        uses: actions/upload-artifact@v4
+        with:
+          name: onprem-diagram
+          path: onprem_network_architecture.png
