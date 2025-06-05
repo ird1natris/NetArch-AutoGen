@@ -2,15 +2,15 @@ from diagrams import Diagram, Cluster
 from diagrams.generic.network import Router, Switch, Firewall, VPN
 from diagrams.generic.compute import Rack
 from diagrams.generic.storage import Storage
-from diagrams.generic.device import Mobile, Tablet, Laptop
-from diagrams.aws.network import VPC, InternetGateway, TransitGateway, PrivateSubnet, PublicSubnet
+from diagrams.generic.device import Mobile, Tablet  # Removed Laptop
+from diagrams.aws.network import VPC, InternetGateway, PrivateSubnet, PublicSubnet
 from diagrams.aws.compute import EC2
 from diagrams.aws.database import RDS
 from diagrams.aws.security import Shield
 
 with Diagram("Hybrid Network Architecture", show=False, filename="hybrid-network-architecture", outformat="png"):
 
-    users = [Mobile("Mobile User"), Tablet("Tablet User"), Laptop("Laptop User")]
+    users = [Mobile("Mobile User"), Tablet("Tablet User")]  # Removed Laptop User
 
     with Cluster("On-Prem Network"):
         onprem_router = Router("Edge Router")
@@ -21,7 +21,7 @@ with Diagram("Hybrid Network Architecture", show=False, filename="hybrid-network
 
         onprem_router >> onprem_fw >> onprem_switch >> [onprem_rack, onprem_db]
 
-    vpn_tunnel = VPN("VPN Tunnel / Transit Gateway")
+    vpn_tunnel = VPN("VPN Tunnel")
 
     with Cluster("AWS Cloud"):
         igw = InternetGateway("Internet Gateway")
