@@ -1,0 +1,22 @@
+name: List Diagrams Nodes
+
+on:
+  workflow_dispatch:   # manual trigger in GitHub UI
+
+jobs:
+  list-nodes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install diagrams package
+        run: pip install diagrams
+
+      - name: Run listing script
+        run: python list_diagrams_nodes.py
