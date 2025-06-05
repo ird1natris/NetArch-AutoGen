@@ -1,0 +1,33 @@
+name: Generate Complex Network Diagram
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-complex:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Graphviz and Diagrams
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y graphviz
+        pip install diagrams
+
+    - name: Run Complex Diagram Script
+      run: |
+        python complex_network.py
+
+    - name: Upload Complex Diagram as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: complex-network-diagram
+        path: complex_network_diagram.png
