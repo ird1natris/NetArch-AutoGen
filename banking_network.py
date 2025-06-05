@@ -7,8 +7,7 @@ from diagrams.onprem.client import Users
 from diagrams.onprem.network import Internet
 from diagrams.generic.network import Firewall
 from diagrams.generic.storage import Storage
-from diagrams.saas.payment import Stripe
-from diagrams.saas.identity import Okta
+from diagrams.generic.device import Mobile  # Used instead of Stripe & Okta
 
 with Diagram("Banking Sector Network Architecture", show=False, outformat="png", filename="banking_network_diagram"):
 
@@ -41,8 +40,8 @@ with Diagram("Banking Sector Network Architecture", show=False, outformat="png",
         kms = KMS("Tokenization/KMS")
 
     with Cluster("3rd Party Integrations"):
-        stripe = Stripe("Payment Gateway")
-        okta = Okta("Identity Provider")
+        stripe = Mobile("Payment Gateway")  # Generic icon instead of Stripe
+        okta = Mobile("Identity Provider")  # Generic icon instead of Okta
         credit_api = EC2("Credit Bureau API")
         storage = Storage("Document Storage")
 
@@ -59,4 +58,3 @@ with Diagram("Banking Sector Network Architecture", show=False, outformat="png",
     services >> credit_api
     services >> storage
     users >> okta >> api_lb
-
