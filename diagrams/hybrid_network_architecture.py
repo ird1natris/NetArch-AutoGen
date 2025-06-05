@@ -1,51 +1,50 @@
 from diagrams import Diagram, Cluster
-from diagrams.generic.network import Router, Switch, Firewall
+from diagrams.generic.network import Router, Switch, Firewall, VPN
 from diagrams.generic.compute import Rack
-from diagrams.generic.database import SQL
 from diagrams.generic.storage import Storage
-from diagrams.onprem.client import Users
-from diagrams.aws.network import VPNConnection, VPC, InternetGateway, PrivateSubnet, PublicSubnet
+from diagrams.generic.device import Mobile, Tablet, Laptop
+from diagrams.aws.network import VPC, InternetGateway, TransitGateway, PrivateSubnet, PublicSubnet
 from diagrams.aws.compute import EC2
 from diagrams.aws.database import RDS
-from diagrams.onprem.client import Users
-from diagrams.onprem.monitoring import Prometheus
-from diagrams.onprem.network import Internet
+from diagrams.aws.security import Shield
 
-with Diagram("Hybrid On-Prem + Cloud Network Architecture", show=False, filename="hybrid-network-architecture", outformat="png"):
+with Diagram("Hybrid Network Architecture", show=False, filename="hybrid-network-architecture", outformat="png"):
 
-    internet = Internet("Internet")
+    users = [Mobile("Mobile User"), Tablet("Tablet User"), Laptop("Laptop User")]
 
-    with Cluster("On-Premise"):
-        firewall = Firewall("Firewall")
-        router = Router("Router")
-        switch = Switch("Core Switch")
+    with Cluster("On-Prem Network"):
+        onprem_router = Router("Edge Router")
+        onprem_fw = Firewall("Firewall")
+        onprem_switch = Switch("Core Switch")
+        onprem_rack = Rack("App Server")
+        onprem_db = Storage("On-Prem DB")
 
-        users = Users("Corporate Users")
+        onprem_router >> onprem_fw >> onprem_switch >> [onprem_rack, onprem_db]
 
-        with Cluster("Internal Services"):
-            ad = WindowsGeneral("Active Directory")
-            db = SQL("On-Prem DB")
-            web = Rack("Internal Web App")
-            storage = Storage("File Server")
-
-        monitoring = Prometheus("Monitoring")
+    vpn_tunnel = VPN("VPN Tunnel / Transit Gateway")
 
     with Cluster("AWS Cloud"):
         igw = InternetGateway("Internet Gateway")
-        vpc = VPC("VPC")
+        shield = Shield("AWS Shield")
 
-        with Cluster("Public Subnet"):
-            ec2_web = EC2("Web Server")
+        with Cluster("VPC"):
+            pub_subnet = PublicSubnet("Public Subnet")
+            priv_subnet = PrivateSubnet("Private Subnet")
 
-        with Cluster("Private Subnet"):
-            ec2_app = EC2("App Server")
-            cloud_db = RDS("Cloud DB")
+            ec2 = EC2("Web App")
+            rds = RDS("Database")
 
-    # Connections
-    internet >> firewall >> router >> switch
-    switch >> users
-    switch >> ad >> db >> web >> storage
-    switch >> monitoring
+            pub_subnet >> ec2
+            priv_subnet >> rds
 
-    router >> VPNConnection("Site-to-Site VPN") >> igw >> vpc
-    vpc >> [ec2_web, ec2_app] >> cloud_db
+        vpc = VPC("Main VPC")
+        vpc >> [pub_subnet, priv_subnet]
+
+    # User access
+    users >> onprem_router
+
+    # On-prem to Cloud
+    onprem_fw >> vpn_tunnel >> vpc
+
+    # Internet to AWS
+    igw >> shield >> ec2
