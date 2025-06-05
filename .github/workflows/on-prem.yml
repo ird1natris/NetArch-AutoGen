@@ -1,4 +1,4 @@
-name: Generate On-Prem Network Diagram
+name: Generate On-Prem Network Diagram 1
 
 on:
   push:
