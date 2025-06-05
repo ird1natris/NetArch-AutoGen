@@ -28,7 +28,7 @@ with Diagram("Multi-Tier Cloud App Architecture", show=False, outformat="png", f
 
         with Cluster("Data Layer"):
             rds = RDS("Relational DB")
-            cache = ElasticCache("Redis Cache")
+            cache = ElastiCache("Redis Cache")
             dynamodb = Dynamodb("NoSQL DB")
 
     with Cluster("Messaging"):
