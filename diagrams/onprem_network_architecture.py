@@ -1,9 +1,10 @@
 from diagrams import Diagram, Cluster, Edge
 from diagrams.onprem.network import Internet
-from diagrams.generic.network import Router, Switch, Firewall, LoadBalancer
+from diagrams.generic.network import Router, Switch, Firewall
 from diagrams.onprem.compute import Server
 from diagrams.onprem.database import Postgresql, Mysql
 from diagrams.onprem.storage import Storage
+from diagrams.custom import Custom
 
 with Diagram("Complex On-Premises Network Architecture", show=False, filename="complex_onprem_network_architecture"):
 
@@ -11,7 +12,7 @@ with Diagram("Complex On-Premises Network Architecture", show=False, filename="c
 
     with Cluster("Perimeter Network (DMZ)"):
         fw_dmz = Firewall("Firewall")
-        lb = LoadBalancer("Load Balancer")
+        lb = Custom("Load Balancer", "./icons/loadbalancer.png")  # Use a custom icon or just text node
         fw_dmz >> lb
 
     with Cluster("Internal Network"):
