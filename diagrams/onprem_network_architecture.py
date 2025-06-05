@@ -1,6 +1,6 @@
 from diagrams import Diagram, Cluster, Edge
-from diagrams.onprem.network import Internet, Router
-from diagrams.generic.network import Firewall
+from diagrams.onprem.network import Internet
+from diagrams.generic.network import Router, Switch, Firewall, LoadBalancer
 from diagrams.onprem.compute import Server
 from diagrams.onprem.database import Postgresql, Mysql
 from diagrams.onprem.storage import Storage
@@ -11,13 +11,13 @@ with Diagram("Complex On-Premises Network Architecture", show=False, filename="c
 
     with Cluster("Perimeter Network (DMZ)"):
         fw_dmz = Firewall("Firewall")
-        # LoadBalancer replacement: use Router as a placeholder
-        lb = Router("Load Balancer (Router)")
+        lb = LoadBalancer("Load Balancer")
         fw_dmz >> lb
 
     with Cluster("Internal Network"):
         fw_internal = Firewall("Internal Firewall")
-        internal_router = Router("Core Router")
+        core_router = Router("Core Router")
+        core_switch = Switch("Core Switch")
 
         with Cluster("Web Layer"):
             web_servers = [Server(f"Web Server {i}") for i in range(1, 4)]
@@ -32,16 +32,17 @@ with Diagram("Complex On-Premises Network Architecture", show=False, filename="c
         storage = Storage("Network Storage")
 
         lb >> fw_internal
-        fw_internal >> internal_router
+        fw_internal >> core_router
+        core_router >> core_switch
 
         for ws in web_servers:
-            internal_router >> ws
+            core_switch >> ws
 
         for app in app_servers:
-            internal_router >> app
+            core_switch >> app
 
-        internal_router >> db_master
-        internal_router >> db_slave
+        core_switch >> db_master
+        core_switch >> db_slave
         db_master >> storage
         db_slave >> storage
 
