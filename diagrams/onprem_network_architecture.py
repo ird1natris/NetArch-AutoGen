@@ -3,7 +3,6 @@ from diagrams.onprem.client import Users
 from diagrams.onprem.network import Internet
 from diagrams.onprem.compute import Server
 from diagrams.onprem.database import Mysql
-from diagrams.onprem.directory import ActiveDirectory
 from diagrams.onprem.security import Iptables, Opnsense
 
 with Diagram("On-Prem Network Architecture", show=False, filename="onprem_network_architecture", direction="LR"):
@@ -13,12 +12,12 @@ with Diagram("On-Prem Network Architecture", show=False, filename="onprem_networ
 
     with Cluster("DMZ"):
         firewall = Iptables("Firewall")
-        web = Server("Nginx Web Server")  # Use Server as stand-in for Nginx
+        web = Server("Nginx Web Server")  # Using generic server for Nginx
         firewall >> web
 
     with Cluster("LAN"):
         opnsense = Opnsense("OpnSense (Router/Switch Alt)")
-        ad = ActiveDirectory("AD Server")
+        ad = Server("Active Directory")  # Generic server as fallback
         file_server = Server("File Server")
         db = Mysql("Database")
         app_server = Server("App Server")
