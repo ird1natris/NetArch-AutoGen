@@ -1,10 +1,11 @@
 from diagrams import Diagram, Cluster
 from diagrams.onprem.client import Users
-from diagrams.onprem.network import Internet, Firewall, Switch
+from diagrams.onprem.network import Internet, Switch
 from diagrams.onprem.compute import Server
 from diagrams.onprem.database import Mysql
 from diagrams.onprem.infra import Nginx
 from diagrams.onprem.directory import ActiveDirectory
+from diagrams.onprem.security import Iptables  # Replaces Firewall
 
 with Diagram("On-Prem Network Architecture", show=False, filename="onprem_network_architecture", direction="LR"):
 
@@ -12,7 +13,7 @@ with Diagram("On-Prem Network Architecture", show=False, filename="onprem_networ
     internet = Internet("Internet")
 
     with Cluster("DMZ"):
-        fw_dmz = Firewall("Firewall")
+        fw_dmz = Iptables("Firewall (Iptables)")
         web_server = Nginx("Web Server")
         fw_dmz >> web_server
 
