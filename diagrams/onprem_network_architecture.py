@@ -1,11 +1,12 @@
 from diagrams import Diagram, Cluster
 from diagrams.onprem.client import Users
-from diagrams.onprem.network import Internet, Router  # Replaced Switch with Router
+from diagrams.onprem.network import Internet
 from diagrams.onprem.compute import Server
 from diagrams.onprem.database import Mysql
 from diagrams.onprem.infra import Nginx
 from diagrams.onprem.directory import ActiveDirectory
-from diagrams.onprem.security import Iptables  # Replaces missing Firewall
+from diagrams.onprem.security import Iptables
+from diagrams.onprem.security import Opnsense  # used in place of Router/Switch
 
 with Diagram("On-Prem Network Architecture", show=False, filename="onprem_network_architecture", direction="LR"):
 
@@ -13,20 +14,20 @@ with Diagram("On-Prem Network Architecture", show=False, filename="onprem_networ
     internet = Internet("Internet")
 
     with Cluster("DMZ"):
-        fw_dmz = Iptables("Firewall (Iptables)")
-        web_server = Nginx("Web Server")
-        fw_dmz >> web_server
+        firewall = Iptables("Firewall")
+        web = Nginx("Web Server")
+        firewall >> web
 
     with Cluster("LAN"):
-        router = Router("Core Router")  # Replaced Switch with Router
+        opnsense = Opnsense("OpnSense (Router/Switch Alt)")
         ad = ActiveDirectory("AD Server")
         file_server = Server("File Server")
-        db_server = Mysql("Database Server")
+        db = Mysql("Database")
         app_server = Server("App Server")
 
-        router >> [ad, file_server, db_server, app_server]
+        opnsense >> [ad, file_server, db, app_server]
 
-    users >> router
-    internet >> fw_dmz
-    web_server >> app_server
-    app_server >> db_server
+    users >> opnsense
+    internet >> firewall
+    web >> app_server
+    app_server >> db
