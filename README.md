@@ -1,15 +1,15 @@
-# 🌐 Network Diagram Generator (Infrastructure as Code)
+# 🌐 NetArch-AutoGen – CI/CD-Based Network Diagram Generator
 
-A GitHub Actions-powered solution for generating professional network architecture diagrams using Python and [Diagrams by Mingrammer](https://diagrams.mingrammer.com/).
+**NetArch-AutoGen** is a GitHub Actions–powered tool that auto-generates professional **network architecture diagrams** using Python and [Diagrams by Mingrammer](https://diagrams.mingrammer.com/). Designed with Infrastructure-as-Code principles, it enables seamless, repeatable diagram generation as part of your CI/CD pipeline.
 
 ---
 
 ## 🔧 Features
 
-- Auto-generates network architecture diagrams via CI/CD
-- Uses Infrastructure as Code approach
-- Artifacts downloadable via GitHub Actions
-- Includes public/private subnets, tiers, and hybrid on-prem setup
+- 🔁 **CI/CD Integration** – Automatically generates diagrams via GitHub Actions on demand or push
+- 📐 **Infrastructure as Code** – Define your architecture logically using Python
+- 📤 **Downloadable Artifacts** – Output diagrams saved as PNGs and attached to each CI run
+- 🌐 **Supports Hybrid Topologies** – Visualize public/private subnets, multiple tiers, and on-prem components
 
 ---
 
@@ -21,27 +21,27 @@ A GitHub Actions-powered solution for generating professional network architectu
 
 ## 🚀 How It Works
 
-1. Edit the `complex_network.py` to model your architecture.
-2. Trigger the GitHub Action manually from the Actions tab.
-3. Download the generated PNG from the “Artifacts” section.
+1. Modify the architecture in `complex_network.py` to match your system.
+2. Trigger the GitHub Action manually or on a push event.
+3. Download the generated diagram (PNG) from the “Artifacts” section of the workflow run.
 
 ---
 
 ## 🗂️ Repository Structure
 
-| File/Folder            | Purpose                              |
-|------------------------|--------------------------------------|
-| `complex_network.py`   | The Python diagram definition        |
-| `.github/workflows/`   | GitHub Actions automation            |
-| `requirements.txt`     | Python dependencies (`diagrams`)     |
-| `assets/`              | Sample output preview                |
+| Path                     | Description                                 |
+|--------------------------|---------------------------------------------|
+| `complex_network.py`     | Defines the network architecture diagram     |
+| `.github/workflows/`     | GitHub Actions workflow for automation       |
+| `requirements.txt`       | Python dependencies (`diagrams`, etc.)       |
+| `assets/`                | Contains sample output previews              |
 
 ---
 
 ## 📥 Getting Started Locally
 
 ```bash
-git clone https://github.com/yourname/network-diagram-generator.git
-cd network-diagram-generator
+git clone https://github.com/yourname/NetArch-AutoGen.git
+cd NetArch-AutoGen
 pip install -r requirements.txt
 python complex_network.py
