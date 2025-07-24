@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+     permissions:
+      contents: write  # ✅ Allow push to the repo
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
