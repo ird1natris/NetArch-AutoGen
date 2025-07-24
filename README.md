@@ -1,4 +1,5 @@
-![Diagram Generation](https://github.com/ird1natris/NetArch-AutoGen/actions/workflows/generate-diagram.yml/badge.svg)
+[![Build Status](https://github.com/ird1natris/NetArch-AutoGen/actions/workflows/diagram.yml/badge.svg)](https://github.com/ird1natris/NetArch-AutoGen/actions)
+[![Python Version](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/)
 
 # 🌐 NetArch-AutoGen – CI/CD-Based Network Diagram Generator
 
