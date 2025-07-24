@@ -1,3 +1,4 @@
+import os
 from diagrams import Cluster, Diagram
 from diagrams.aws.compute import EC2, Lambda, ECS
 from diagrams.aws.network import ELB, Route53, VPC, PrivateSubnet, PublicSubnet
@@ -7,7 +8,12 @@ from diagrams.aws.security import WAF, Shield, IAM
 from diagrams.onprem.client import Users
 from diagrams.generic.network import Firewall
 
-with Diagram("Multi-Tier Cloud App Architecture", show=False, outformat="png", filename="multi_tier_cloud_app"):
+# Ensure outputs folder exists
+os.makedirs("outputs", exist_ok=True)
+
+output_path = "outputs/multi_tier_cloud_app"
+
+with Diagram("Multi-Tier Cloud App Architecture", show=False, outformat="png", filename=output_path):
 
     users = Users("Users")
     internet = VPC("Internet")
@@ -37,7 +43,6 @@ with Diagram("Multi-Tier Cloud App Architecture", show=False, outformat="png", f
 
     iam = IAM("IAM Roles & Policies")
 
-    # Connections
     users >> internet >> dns >> waf >> shield >> fw >> lb >> ecs_services
     ecs_services >> rds
     ecs_services >> cache
