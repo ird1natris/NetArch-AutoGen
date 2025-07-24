@@ -1,3 +1,5 @@
+![Diagram Generation](https://github.com/ird1natris/NetArch-AutoGen/actions/workflows/generate-diagram.yml/badge.svg)
+
 # 🌐 NetArch-AutoGen – CI/CD-Based Network Diagram Generator
 
 **NetArch-AutoGen** is a GitHub Actions–powered tool that auto-generates professional **network architecture diagrams** using Python and [Diagrams by Mingrammer](https://diagrams.mingrammer.com/). Designed with Infrastructure-as-Code principles, it enables seamless, repeatable diagram generation as part of your CI/CD pipeline.
