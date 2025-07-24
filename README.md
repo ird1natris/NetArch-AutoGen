@@ -20,30 +20,13 @@
 ![Network Diagram](assets/sample-output.png)
 
 ---
-
 ## 🚀 How It Works
 
-1. Modify the architecture in `complex_network.py` to match your system.
-2. Trigger the GitHub Action manually or on a push event.
-3. Download the generated diagram (PNG) from the “Artifacts” section of the workflow run.
+1. Add a new YAML or JSON file under the `configs/` folder.
+2. Push your changes to GitHub.
+3. GitHub Actions will automatically:
+   - Run your Python script
+   - Generate a network diagram (PNG)
+   - Commit it to the `outputs/` folder
 
----
-
-## 🗂️ Repository Structure
-
-| Path                     | Description                                 |
-|--------------------------|---------------------------------------------|
-| `complex_network.py`     | Defines the network architecture diagram     |
-| `.github/workflows/`     | GitHub Actions workflow for automation       |
-| `requirements.txt`       | Python dependencies (`diagrams`, etc.)       |
-| `assets/`                | Contains sample output previews              |
-
----
-
-## 📥 Getting Started Locally
-
-```bash
-git clone https://github.com/yourname/NetArch-AutoGen.git
-cd NetArch-AutoGen
-pip install -r requirements.txt
-python complex_network.py
+No manual effort required!
