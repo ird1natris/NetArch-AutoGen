@@ -40,3 +40,29 @@ open outputs/sample_config.png
 - CI runs automatically via diagram.yml
 - PNG diagrams saved into outputs/ folder and committed back
 - ✅ Check Actions tab for build status
+
+---
+
+## 🗂️ Project Structure
+```bash
+NetArch‑AutoGen/
+├ configs/         # Input YAML/JSON configs
+├ diagrams/        # Script definitions of various architectures
+│   ├ diagram_generator.py
+│   └ multi_tier_cloud_app.py
+├ outputs/         # Auto-generated PNGs (via CI or CLI)
+├ src/
+│   ├ cli.py
+│   ├ config_parser.py
+│   └ diagram_generator.py
+├ tests/
+│   ├ test_config_parser.py
+├ .github/workflows/
+│   ├ diagram.yml
+|   ├ github-actions-demo.yml
+│   └ list_nodes.yml
+├ .gitignore
+├ LICENSE
+├ requirements.txt
+└ README.md
+
