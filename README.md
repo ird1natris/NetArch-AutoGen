@@ -25,3 +25,13 @@ git clone https://github.com/ird1natris/NetArch-AutoGen.git
 cd NetArch‑AutoGen
 pip install -r requirements.txt
 sudo apt-get install graphviz
+```
+### 2. Generate a sample diagram using CLI
+```bash
+python src/cli.py \
+  --config configs/sample_config.yaml \
+  --output outputs/sample_config.png
+
+# View your diagram:
+open outputs/sample_config.png
+```
