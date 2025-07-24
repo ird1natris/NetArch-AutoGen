@@ -3,4 +3,7 @@ __pycache__/
 .env
 *.env
 *.log
+
+# Ignore all PNGs except output diagrams
 *.png
+!outputs/*.png
