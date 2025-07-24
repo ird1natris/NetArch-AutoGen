@@ -124,3 +124,9 @@ NetArch‑AutoGen is ideal for:
 
 - 🌍 **Scalable & Extensible**  
   Easily add new architectures or customize existing ones to fit any environment.
+
+  ---
+
+  ## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
