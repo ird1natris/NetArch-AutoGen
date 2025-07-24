@@ -45,6 +45,10 @@ jobs:
             fname=$(basename "$cfg" | sed 's/\.[^.]*$//')
             python src/cli.py --config "$cfg" --output "outputs/${fname}.png"
           done
+          
+      - name: Generate multi-tier cloud app diagram
+        run: |
+          python diagrams/multi_tier_cloud_app.py
 
       - name: Commit and push diagrams
         run: |
