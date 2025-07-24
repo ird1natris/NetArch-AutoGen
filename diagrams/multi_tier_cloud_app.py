@@ -13,7 +13,7 @@ os.makedirs("outputs", exist_ok=True)
 
 output_path = "outputs/multi_tier_cloud_app"
 
-with Diagram("Multi-Tier Cloud App Architecture", show=False, outformat="png", filename=output_path):
+with Diagram("Multi-Tier Cloud App Architecture", show=False, outformat="png", filename="outputs/multi_tier_cloud_app"):
 
     users = Users("Users")
     internet = VPC("Internet")
