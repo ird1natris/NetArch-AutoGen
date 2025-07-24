@@ -1,43 +1,52 @@
-name: Generate Network Diagram
+name: Generate Network Diagrams
 
 on:
   push:
+    branches: [main]
     paths:
       - 'configs/**'
       - 'src/**'
       - '.github/workflows/diagram.yml'
   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-     permissions:
-      contents: write  # ✅ Allow push to the repo
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+permissions:
+  contents: write
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install Graphviz and Python dependencies
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y graphviz
           pip install -r requirements.txt
 
-      - name: Generate network diagrams
+      - name: Generate diagrams
         run: |
           mkdir -p outputs
           for cfg in configs/*.{yml,yaml,json}; do
             [ -e "$cfg" ] || continue
             fname=$(basename "$cfg" | sed 's/\.[^.]*$//')
-            python src/main.py --config "$cfg" --output "outputs/${fname}.png"
+            python src/cli.py --config "$cfg" --output "outputs/${fname}.png"
           done
 
-      - name: Commit and push generated diagrams
+      - name: Commit and push diagrams
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
