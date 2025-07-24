@@ -1,0 +1,5 @@
+title: Sample AWS Network Diagram
+vpc: MainVPC
+internet_gateway: MyIGW
+nat_gateway: MyNAT
+route_table: PublicRouteTable
