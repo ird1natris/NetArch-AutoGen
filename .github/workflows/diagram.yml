@@ -3,10 +3,9 @@ name: Generate Network Diagram
 on:
   push:
     paths:
-      - 'configs/**.yml'
-      - 'configs/**.yaml'
-      - 'configs/**.json'
-      - 'src/**.py'
+      - 'configs/**'
+      - 'src/**'
+      - '.github/workflows/diagram.yml'
   workflow_dispatch:
 
 jobs:
