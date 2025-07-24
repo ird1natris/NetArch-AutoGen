@@ -6,7 +6,6 @@
 [![Contributors](https://img.shields.io/github/contributors/ird1natris/NetArch-AutoGen)](https://github.com/ird1natris/NetArch-AutoGen/graphs/contributors)
 [![Issues](https://img.shields.io/github/issues/ird1natris/NetArch-AutoGen)](https://github.com/ird1natris/NetArch-AutoGen/issues)
 [![Stars](https://img.shields.io/github/stars/ird1natris/NetArch-AutoGen?style=social)](https://github.com/ird1natris/NetArch-AutoGen/stargazers)
-[![Forks](https://img.shields.io/github/forks/ird1natris/NetArch-AutoGen?style=social)](https://github.com/ird1natris/NetArch-AutoGen/fork)
 
 # NetArch‑AutoGen 🏗️
 
