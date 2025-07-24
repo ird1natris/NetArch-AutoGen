@@ -1,4 +1,4 @@
-title: Sample AWS Network Diagram
+title: Sample AWS Network Diagram Trial
 vpc: MainVPC
 internet_gateway: MyIGW
 nat_gateway: MyNAT
