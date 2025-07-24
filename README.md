@@ -30,3 +30,9 @@
    - Commit it to the `outputs/` folder
 
 No manual effort required!
+
+## ✨ Coming Soon
+
+- AI-assisted config generation
+- SVG support
+- Drag-and-drop web UI
