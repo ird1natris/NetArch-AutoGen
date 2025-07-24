@@ -35,3 +35,8 @@ python src/cli.py \
 # View your diagram:
 open outputs/sample_config.png
 ```
+### 3. Let GitHub auto-generate diagrams
+- Push changes to configs/ or src/
+- CI runs automatically via diagram.yml
+- PNG diagrams saved into outputs/ folder and committed back
+✅ Check Actions tab for build status.
