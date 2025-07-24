@@ -18,7 +18,7 @@
 
 ## 📌 Sample Output
 
-![Network Diagram](assets/sample-output.png)
+![Network Diagram](outputs/multi_tier_cloud_app.png)
 
 ---
 ## 🚀 How It Works
