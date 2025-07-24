@@ -66,3 +66,4 @@ NetArch‑AutoGen/
 ├ requirements.txt
 └ README.md
 ```
+## 📊 Demo & Screenshots
