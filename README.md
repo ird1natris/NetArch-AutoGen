@@ -59,7 +59,7 @@ NetArch‑AutoGen/
 │   ├ test_config_parser.py
 ├ .github/workflows/
 │   ├ diagram.yml
-|   ├ github-actions-demo.yml
+│   ├ github-actions-demo.yml
 │   └ list_nodes.yml
 ├ .gitignore
 ├ LICENSE
