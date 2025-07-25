@@ -102,8 +102,3 @@ NetArch‑AutoGen is ideal for:
 - 🔄 **Infrastructure-as-Code Ready** — CI/CD integrated.
 - 📈 **Better Communication** — Clear visuals for all stakeholders.
 - 🌍 **Scalable & Extensible** — Add new templates or architectures with ease.
-
----
-
-## 📜 License
-![MIT License](LICENSE)
