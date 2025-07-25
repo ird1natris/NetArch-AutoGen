@@ -1,9 +1,9 @@
-# **NetArch‑AutoGen 🏗️**  
-**Infrastructure-as-Code Meets Visuals.**  
-
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python)](https://www.python.org/)  
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)  
-[![Build Status](https://img.shields.io/github/actions/workflow/status/ird1natris/NetArch-AutoGen/diagram.yml?label=CI%20Build&logo=github)](https://github.com/ird1natris/NetArch-AutoGen/actions)  
+[![Build Status](https://img.shields.io/github/actions/workflow/status/ird1natris/NetArch-AutoGen/diagram.yml?label=CI%20Build&logo=github)](https://github.com/ird1natris/NetArch-AutoGen/actions)
+
+# **NetArch‑AutoGen 🏗️**  
+**Infrastructure-as-Code Meets Visuals.**    
 
 Automate your network architecture diagramming — transform simple YAML/JSON configs into **professional, standardized visuals**.  
 
