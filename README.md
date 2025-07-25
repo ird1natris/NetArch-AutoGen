@@ -106,4 +106,4 @@ NetArch‑AutoGen is ideal for:
 ---
 
 ## 📜 License
-![MIT License]()
+![MIT License](LICENSE)
