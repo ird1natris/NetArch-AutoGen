@@ -1,10 +1,7 @@
 [![Build Status](https://github.com/ird1natris/NetArch-AutoGen/actions/workflows/diagram.yml/badge.svg)](https://github.com/ird1natris/NetArch-AutoGen/actions)
 [![Python Version](https://img.shields.io/badge/python-3.10%E2%80%933.11-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/ird1natris/NetArch-AutoGen)](https://github.com/ird1natris/NetArch-AutoGen/commits)
-[![Repo Size](https://img.shields.io/github/repo-size/ird1natris/NetArch-AutoGen)](https://github.com/ird1natris/NetArch-AutoGen)
 [![Contributors](https://img.shields.io/github/contributors/ird1natris/NetArch-AutoGen)](https://github.com/ird1natris/NetArch-AutoGen/graphs/contributors)
-[![Issues](https://img.shields.io/github/issues/ird1natris/NetArch-AutoGen)](https://github.com/ird1natris/NetArch-AutoGen/issues)
 [![Stars](https://img.shields.io/github/stars/ird1natris/NetArch-AutoGen?style=social)](https://github.com/ird1natris/NetArch-AutoGen/stargazers)
 
 # NetArch‑AutoGen 🏗️
