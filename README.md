@@ -79,10 +79,10 @@ NetArch‑AutoGen/
 - ✅ CLI-driven diagram generation
 - ✅ Multi-tier & config diagrams
 - ✅ GitHub Actions automation
-- 🔜 Streamlit / Flask UI           -| Coming Soon ⏳
-- 🔜 SVG/HTML export                -| Coming Soon ⏳
-- 🔜 Zero-Trust diagram support     -| Planned 📅
-- 🔜 Slack/MS Teams notifications   -| Planned 📅
+- 🔜 Streamlit / Flask UI           | Coming Soon ⏳
+- 🔜 SVG/HTML export                | Coming Soon ⏳
+- 🔜 Zero-Trust diagram support     | Planned 📅
+- 🔜 Slack/MS Teams notifications   | Planned 📅
 
 ---
 
