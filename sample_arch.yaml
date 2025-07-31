@@ -1,0 +1,33 @@
+title: "Sample Cloud Architecture"
+components:
+  - type: client
+    name: Users
+  - type: dns
+    name: Route53
+  - type: waf
+    name: WAF
+  - type: load_balancer
+    name: ELB
+  - type: compute
+    name: ECS Service A
+  - type: compute
+    name: ECS Service B
+  - type: database
+    name: RDS
+  - type: messaging
+    name: SQS
+connections:
+  - from: Users
+    to: Route53
+  - from: Route53
+    to: WAF
+  - from: WAF
+    to: ELB
+  - from: ELB
+    to: ECS Service A
+  - from: ELB
+    to: ECS Service B
+  - from: ECS Service A
+    to: RDS
+  - from: ECS Service B
+    to: SQS
