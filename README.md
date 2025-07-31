@@ -9,7 +9,7 @@ Perfect for **cloud architects, network engineers, and security teams** who want
 
 ---
 
-## **🚀 Demo**
+## **🚀 Sample Output**
 ![Sample Diagram](outputs/multi_tier_cloud_app.png)  
 *(Example of a multi-tier cloud architecture diagram generated with NetArch‑AutoGen.)*
 
