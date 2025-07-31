@@ -16,7 +16,7 @@ st.markdown("Auto-generate network architecture diagrams from Python scripts, po
 st.header("📌 Sample Output")
 sample_path = Path("outputs/multi_tier_cloud_app.png")  # Replace with your generated image path
 if sample_path.exists():
-    st.image(str(sample_path), caption="Generated Architecture Diagram", use_column_width=True)
+    st.image(str(sample_path), caption="Generated Architecture Diagram", use_container_width=True)
 else:
     st.warning("No output image found. Make sure your diagram file exists in the 'outputs/' folder.")
 
