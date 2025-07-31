@@ -1,3 +1,5 @@
 diagrams
 pyyaml
 graphviz
+streamlit
+# Add any other packages this project needs
