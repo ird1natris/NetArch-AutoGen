@@ -17,7 +17,7 @@ if uploaded_file:
     yaml_content = uploaded_file.read().decode("utf-8")
     output_path = "outputs/generated_diagram"
     os.makedirs("outputs", exist_ok=True)
-    generate_diagram_from_yaml(yaml_content, filename=output_path)
+    generate_diagram(yaml_content, filename=output_path)
     
     st.image(f"{output_path}.png", caption="Generated Architecture Diagram", use_container_width=True)
 
