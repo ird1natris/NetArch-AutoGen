@@ -8,7 +8,7 @@ import os
 st.set_page_config(
     page_title="NetArch-AutoGen",
     page_icon="🚀",
-    layout="wide",
+    layout="centered",
 )
 
 st.title("🚀 NetArch-AutoGen")
