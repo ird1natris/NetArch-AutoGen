@@ -1,5 +1,3 @@
-# diagram_generator.py
-
 import yaml
 from diagrams import Diagram
 from diagrams.aws.compute import ECS
