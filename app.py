@@ -1,8 +1,11 @@
 import streamlit as st
 from pathlib import Path
-from diagram_generator import generate_diagram  # Adjust this import if needed
+from diagram_generator import generate_diagram
 import tempfile
 import os
+import sys
+sys.path.append("src")
+
 
 # App layout
 st.set_page_config(page_title="NetArch-AutoGen", layout="centered")
