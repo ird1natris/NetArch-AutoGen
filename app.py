@@ -1,7 +1,7 @@
 # app.py
 
 import streamlit as st
-from diagram_generator import generate_diagram_from_yaml
+from diagram_generator import generate_diagram
 import os
 from PIL import Image
 
