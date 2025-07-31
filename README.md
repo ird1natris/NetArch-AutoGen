@@ -9,6 +9,15 @@ Perfect for **cloud architects, network engineers, and security teams** who want
 
 ---
 
+## 🌐 Live Demo
+
+Check out the live app here:  
+🔗 [NetArch-AutoGen on Streamlit](https://ird1natris-netarch-autogen.streamlit.app)
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ird1natris-netarch-autogen.streamlit.app)
+
+---
+
 ## **🚀 Demo**
 ![Sample Diagram](outputs/multi_tier_cloud_app.png)  
 *(Example of a multi-tier cloud architecture diagram generated with NetArch‑AutoGen.)*
