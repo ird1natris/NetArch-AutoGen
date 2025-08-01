@@ -1,17 +1,18 @@
-title: "Sample Cloud Architecture"
+title: Sample Network Architecture
 resources:
-  - name: "Internet Gateway"
-    type: "internet_gateway"
-  - name: "Web Server"
-    type: "ec2"
-  - name: "App Server"
-    type: "ec2"
-  - name: "Database"
-    type: "rds"
+  - name: Web Server
+    type: ec2
+  - name: Load Balancer
+    type: elb
+  - name: Internet Gateway
+    type: internet_gateway
+  - name: Database
+    type: rds
+
 connections:
-  - from: "Internet Gateway"
-    to: "Web Server"
-  - from: "Web Server"
-    to: "App Server"
-  - from: "App Server"
-    to: "Database"
+  - from: Internet Gateway
+    to: Load Balancer
+  - from: Load Balancer
+    to: Web Server
+  - from: Web Server
+    to: Database
