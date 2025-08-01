@@ -40,26 +40,10 @@ jobs:
       - name: Generate diagrams from config files
         run: |
           mkdir -p outputs
-          found_files=0
-          for file in configs/*.yaml configs/*.yml configs/*.json; do
-            if [ -e "$file" ]; then
-              found_files=1
-              base=$(basename "$file" | cut -d. -f1)
-              python -c "import yaml, json, os, sys; \
-from src.diagram_generator import generate_diagram_from_yaml; \
-ext = os.path.splitext('$file')[1].lower(); \
-with open('$file') as f: \
-  data = yaml.safe_load(f) if ext in ['.yaml', '.yml'] else json.load(f); \
-generate_diagram_from_yaml(data, filename=f'outputs/{base}')"
-            fi
-          done
-          if [ $found_files -eq 0 ]; then
-            echo "No config files found, skipping diagram generation."
-          fi
+          python src/generate_all.py
 
       - name: Generate multi-tier cloud app diagram
-        run: |
-          python diagrams/multi_tier_cloud_app.py
+        run: python diagrams/multi_tier_cloud_app.py
 
       - name: Commit and push diagrams
         run: |
