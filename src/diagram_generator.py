@@ -1,4 +1,5 @@
 import os
+import yaml
 from diagrams import Diagram, Cluster
 from diagrams.aws.compute import EC2
 from diagrams.aws.network import ELB, VPC, InternetGateway
