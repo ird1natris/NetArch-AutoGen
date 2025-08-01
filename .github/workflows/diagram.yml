@@ -37,6 +37,13 @@ jobs:
           sudo apt-get install -y graphviz
           pip install -r requirements.txt
 
+      - name: Generate diagrams from config files
+        run: |
+          mkdir -p outputs
+          for file in configs/*.yaml configs/*.yml configs/*.json; do
+            python -c "import yaml, json; from src.diagram_generator import generate_diagram_from_yaml as f; f(yaml.safe_load(open('$file')), filename='outputs/$(basename "$file" | cut -d. -f1).png')"
+          done
+
       - name: Generate diagrams
         run: |
           mkdir -p outputs
