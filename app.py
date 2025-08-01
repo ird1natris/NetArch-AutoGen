@@ -1,30 +1,26 @@
 import streamlit as st
-import os
 import yaml
+import json
 from src.diagram_generator import generate_diagram_from_yaml
 
-st.set_page_config(page_title="NetArch-AutoGen", layout="centered")
-st.title("📊 NetArch-AutoGen")
-st.write("Upload a YAML or JSON config to generate your network architecture diagram.")
+st.title("NetArch-AutoGen Diagram Generator")
 
-uploaded_file = st.file_uploader("Upload a config file", type=["yaml", "yml", "json"])
+uploaded_file = st.file_uploader("Upload your YAML or JSON config file", type=['yaml', 'yml', 'json'])
 
-if uploaded_file is not None:
-    file_contents = uploaded_file.read().decode("utf-8")
-    filename = os.path.splitext(uploaded_file.name)[0]
-    output_path = f"outputs/{filename}.png"
-
-    os.makedirs("outputs", exist_ok=True)
-
+if uploaded_file:
     try:
-        config_data = yaml.safe_load(file_contents)
-        generate_diagram_from_yaml(config_data, filename=output_path)
-        st.success("✅ Diagram generated successfully!")
-
-        if os.path.exists(output_path):
-            st.image(output_path, caption="Generated Network Diagram", use_container_width=True)
+        content = uploaded_file.read().decode()
+        if uploaded_file.type in ['application/json']:
+            data = json.loads(content)
         else:
-            st.error("❌ Failed to generate diagram: Output file not found.")
+            data = yaml.safe_load(content)
+
+        # Use your improved function here
+        output_path = generate_diagram_from_yaml(data, filename=f"outputs/{uploaded_file.name.rsplit('.',1)[0]}")
+
+        st.success("✅ Diagram generated successfully!")
+        st.image(output_path, caption="Generated Diagram", use_column_width=True)
 
     except Exception as e:
         st.error(f"❌ Failed to generate diagram: {e}")
+
