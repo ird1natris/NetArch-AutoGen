@@ -1,7 +1,5 @@
 import os
 import datetime
-import random
-import string
 from diagrams import Diagram, Cluster
 from diagrams.aws.compute import EC2
 from diagrams.aws.network import ELB, VPC, InternetGateway
@@ -9,7 +7,7 @@ from diagrams.aws.database import RDS
 
 def generate_diagram_from_yaml(data, filename="outputs/sample"):
     try:
-        # Ensure the output folder exists
+        # Ensure output folder exists
         folder = os.path.dirname(filename)
         if not os.path.exists(folder):
             os.makedirs(folder)
@@ -48,7 +46,7 @@ def generate_diagram_from_yaml(data, filename="outputs/sample"):
         return output_file
 
     except Exception as e:
-        # Create unique fallback folder like outputs/generated_20250801_1425 or random suffix
+        # Fallback: create unique folder with timestamp and save fallback diagram
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         fallback_folder = f"outputs/generated_{timestamp}"
         os.makedirs(fallback_folder, exist_ok=True)
