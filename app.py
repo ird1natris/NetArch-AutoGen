@@ -19,7 +19,7 @@ if uploaded_file:
         output_path = generate_diagram_from_yaml(data, filename=f"outputs/{uploaded_file.name.rsplit('.',1)[0]}")
 
         st.success("✅ Diagram generated successfully!")
-        st.image(output_path, caption="Generated Diagram", use_column_width=True)
+        st.image(output_path, caption="Generated Diagram", use_container_width=True)
 
     except Exception as e:
         st.error(f"❌ Failed to generate diagram: {e}")
