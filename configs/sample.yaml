@@ -1,0 +1,17 @@
+title: "Sample Cloud Architecture"
+resources:
+  - name: "Internet Gateway"
+    type: "internet_gateway"
+  - name: "Web Server"
+    type: "ec2"
+  - name: "App Server"
+    type: "ec2"
+  - name: "Database"
+    type: "rds"
+connections:
+  - from: "Internet Gateway"
+    to: "Web Server"
+  - from: "Web Server"
+    to: "App Server"
+  - from: "App Server"
+    to: "Database"
