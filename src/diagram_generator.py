@@ -6,10 +6,12 @@ from diagrams.aws.network import ELB, VPC, InternetGateway
 from diagrams.aws.database import RDS
 from typing import Dict, Any
 
-def generate_diagram_from_yaml(data, filename="outputs/diagram.png"):
+def generate_diagram_from_yaml(data: Dict[str, Any], filename="outputs/sample"):
     title = data.get("title", "Network Architecture")
 
-    with Diagram(title, filename=filename, outformat="png", show=False):
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+    with Diagram(title, filename=os.path.abspath(filename), outformat="png", show=False):
         nodes = {}
 
         for resource in data.get("resources", []):
