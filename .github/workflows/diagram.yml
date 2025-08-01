@@ -37,9 +37,9 @@ jobs:
           sudo apt-get install -y graphviz
           pip install -r requirements.txt
 
-      - name: Generate diagrams from config files
+      - name: Run generate_all.py
         run: |
-          python src/generate_all.py
+          PYTHONPATH=src python src/generate_all.py
 
       - name: Generate multi-tier cloud app diagram
         run: python diagrams/multi_tier_cloud_app.py
