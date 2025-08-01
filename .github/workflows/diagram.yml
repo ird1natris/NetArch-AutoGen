@@ -38,9 +38,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run generate_all.py
-        run: |
-          PYTHONPATH=src python src/generate_all.py
-
+        working-directory: ./src
+        run: python generate_all.py
+          
       - name: Generate multi-tier cloud app diagram
         run: python diagrams/multi_tier_cloud_app.py
 
