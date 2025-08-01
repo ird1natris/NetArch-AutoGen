@@ -1,7 +1,10 @@
+import sys
 import os
 import yaml
 import json
 from src.diagram_generator import generate_diagram_from_yaml
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 def main():
     config_folder = "configs"
