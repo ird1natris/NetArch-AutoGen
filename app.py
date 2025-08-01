@@ -25,7 +25,7 @@ if dark_mode:
     )
 
 # --- Title and Intro ---
-st.markdown("<h1 style='text-align: center;'>NetArch-AutoGen logo = "assets/deep-learning.png"</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>NetArch-AutoGen</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Upload your network config and auto-generate diagrams!</p>", unsafe_allow_html=True)
 
 # --- File Uploader ---
