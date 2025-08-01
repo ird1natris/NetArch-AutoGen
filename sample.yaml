@@ -1,0 +1,22 @@
+title: Sample Multi-Tier App
+
+components:
+  - type: load_balancer
+    name: LB
+  - type: web_server
+    name: Web1
+  - type: web_server
+    name: Web2
+  - type: app_server
+    name: App1
+  - type: database
+    name: DB
+connections:
+  - from: LB
+    to: [Web1, Web2]
+  - from: Web1
+    to: App1
+  - from: Web2
+    to: App1
+  - from: App1
+    to: DB
