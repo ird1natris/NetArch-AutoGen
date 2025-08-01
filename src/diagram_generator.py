@@ -1,23 +1,34 @@
+import os
+import yaml
 from diagrams import Diagram, Cluster
+from diagrams.aws.compute import EC2
 from diagrams.aws.network import ELB, VPC, InternetGateway
+from diagrams.aws.database import RDS
 from typing import Dict, Any
 
-def generate_diagram(config: Dict[str, Any], output_path: str) -> None:
-    """
-    Generate network architecture diagram based on config.
+def generate_diagram_from_yaml(data, filename="outputs/diagram.png"):
+    title = data.get("title", "Network Architecture")
 
-    Args:
-        config (Dict[str, Any]): Parsed config data.
-        output_path (str): File path to save the diagram PNG.
+    with Diagram(title, filename=filename, outformat="png", show=False):
+        nodes = {}
 
-    Returns:
-        None
-    """
-    # This is a sample stub — expand based on your config schema
-    with Diagram("Network Architecture", filename=output_path, outformat="png", show=False):
-        with Cluster("VPC"):
-            igw = InternetGateway("IGW")
-            lb = ELB("Load Balancer")
-            # Add nodes dynamically based on config content here
+        for resource in data.get("resources", []):
+            name = resource.get("name")
+            r_type = resource.get("type")
 
-    print(f"Diagram saved to {output_path}")
+            if r_type == "ec2":
+                nodes[name] = EC2(name)
+            elif r_type == "elb":
+                nodes[name] = ELB(name)
+            elif r_type == "internet_gateway":
+                nodes[name] = InternetGateway(name)
+            elif r_type == "rds":
+                nodes[name] = RDS(name)
+            else:
+                nodes[name] = EC2(name)  # fallback
+
+        for conn in data.get("connections", []):
+            src = conn.get("from")
+            dst = conn.get("to")
+            if src in nodes and dst in nodes:
+                nodes[src] >> nodes[dst]
