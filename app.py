@@ -1,31 +1,30 @@
 import streamlit as st
 import os
 import yaml
-from src.diagram_generator import generate_diagram_from_yaml
+from diagram_generator import generate_diagram_from_yaml
 
-st.set_page_config(page_title="NetArch-AutoGen", layout="wide")
+st.set_page_config(page_title="NetArch-AutoGen", layout="centered")
+st.title("📊 NetArch-AutoGen")
+st.write("Upload a YAML or JSON config to generate your network architecture diagram.")
 
-st.title("🕸️NetArch-AutoGen")
-st.markdown("Upload a YAML or JSON file describing your cloud/network setup.")
+uploaded_file = st.file_uploader("Upload a config file", type=["yaml", "yml", "json"])
 
-uploaded_file = st.file_uploader("Choose a YAML/JSON file", type=["yaml", "yml", "json"])
+if uploaded_file is not None:
+    file_contents = uploaded_file.read().decode("utf-8")
+    filename = os.path.splitext(uploaded_file.name)[0]
+    output_path = f"outputs/{filename}.png"
 
-if uploaded_file:
+    os.makedirs("outputs", exist_ok=True)
+
     try:
-        content = uploaded_file.read().decode("utf-8")
-        if uploaded_file.name.endswith(".json"):
-            import json
-            data = json.loads(content)
+        config_data = yaml.safe_load(file_contents)
+        generate_diagram_from_yaml(config_data, filename=output_path)
+        st.success("✅ Diagram generated successfully!")
+
+        if os.path.exists(output_path):
+            st.image(output_path, caption="Generated Network Diagram", use_container_width=True)
         else:
-            data = yaml.safe_load(content)
-
-        os.makedirs("outputs", exist_ok=True)
-        output_path = f"outputs/{uploaded_file.name.split('.')[0]}.png"
-
-        generate_diagram_from_yaml(data, filename=output_path)
-        st.success("Diagram generated successfully!")
-
-        st.image(output_path, caption="Generated Diagram", use_container_width=True)
+            st.error("❌ Failed to generate diagram: Output file not found.")
 
     except Exception as e:
-        st.error(f"Failed to generate diagram: {str(e)}")
+        st.error(f"❌ Failed to generate diagram: {e}")
