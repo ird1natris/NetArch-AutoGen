@@ -6,7 +6,7 @@ from io import StringIO
 from src.diagram_generator import generate_diagram_from_yaml
 
 # Set page config
-st.set_page_config(page_title="NetArch-AutoGen", page_icon="🛠️", layout="centered")
+st.set_page_config(page_title="NetArch-AutoGen", page_icon="assets/deep-learning.png", layout="centered")
 
 # --- Sidebar (Dark mode + Sample download) ---
 st.sidebar.title("⚙️ Settings")
