@@ -39,7 +39,6 @@ jobs:
 
       - name: Generate diagrams from config files
         run: |
-          mkdir -p outputs
           python src/generate_all.py
 
       - name: Generate multi-tier cloud app diagram
