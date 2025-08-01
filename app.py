@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 import yaml
-from diagram_generator import generate_diagram_from_yaml
+from src.diagram_generator import generate_diagram_from_yaml
 
 st.set_page_config(page_title="NetArch-AutoGen", layout="centered")
 st.title("📊 NetArch-AutoGen")
