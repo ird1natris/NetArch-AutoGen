@@ -1,33 +1,22 @@
-title: Sample Network Architecture
+title: Sample Multi-Tier App
 
-resources:
-  - name: InternetGateway
-    type: internet_gateway
-
-  - name: LoadBalancer
-    type: elb
-
-  - name: WebServer1
-    type: ec2
-
-  - name: WebServer2
-    type: ec2
-
-  - name: Database
-    type: rds
-
+components:
+  - type: load_balancer
+    name: LB
+  - type: web_server
+    name: Web1
+  - type: web_server
+    name: Web2
+  - type: app_server
+    name: App1
+  - type: database
+    name: DB
 connections:
-  - from: InternetGateway
-    to: LoadBalancer
-
-  - from: LoadBalancer
-    to: WebServer1
-
-  - from: LoadBalancer
-    to: WebServer2
-
-  - from: WebServer1
-    to: Database
-
-  - from: WebServer2
-    to: Database
+  - from: LB
+    to: [Web1, Web2]
+  - from: Web1
+    to: App1
+  - from: Web2
+    to: App1
+  - from: App1
+    to: DB
