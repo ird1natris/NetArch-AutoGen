@@ -1,27 +1,37 @@
 import os
-import glob
 import yaml
 import json
 from src.diagram_generator import generate_diagram_from_yaml
 
 def main():
-    os.makedirs("outputs", exist_ok=True)
+    config_folder = "configs"
+    output_folder = "outputs"
+    os.makedirs(output_folder, exist_ok=True)
 
-    config_files = glob.glob("configs/*.yaml") + glob.glob("configs/*.yml") + glob.glob("configs/*.json")
+    # List all yaml, yml, json files in configs/
+    files = []
+    for ext in ("*.yaml", "*.yml", "*.json"):
+        files.extend(os.path.join(config_folder, f) for f in os.listdir(config_folder) if f.endswith(ext[1:]))
 
-    if not config_files:
-        print("No config files found, skipping diagram generation.")
-    else:
-        for filepath in config_files:
-            ext = os.path.splitext(filepath)[1].lower()
+    if not files:
+        print("No config files found in 'configs/' folder.")
+        return
+
+    for filepath in files:
+        print(f"Processing {filepath} ...")
+        try:
             with open(filepath) as f:
-                if ext in ['.yaml', '.yml']:
+                ext = os.path.splitext(filepath)[1].lower()
+                if ext in [".yaml", ".yml"]:
                     data = yaml.safe_load(f)
                 else:
                     data = json.load(f)
-            base = os.path.splitext(os.path.basename(filepath))[0]
-            print(f"Generating diagram from {filepath} -> outputs/{base}.png")
-            generate_diagram_from_yaml(data, filename=f"outputs/{base}")
+
+            filename = os.path.join(output_folder, os.path.splitext(os.path.basename(filepath))[0])
+            generate_diagram_from_yaml(data, filename=filename)
+            print(f"Diagram saved to {filename}.png\n")
+        except Exception as e:
+            print(f"Failed to process {filepath}: {e}")
 
 if __name__ == "__main__":
     main()
