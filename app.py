@@ -2,62 +2,71 @@ import streamlit as st
 import yaml
 import json
 import os
-from datetime import datetime
+from io import StringIO
 from src.diagram_generator import generate_diagram_from_yaml
 
-st.set_page_config(page_title="NetArch-AutoGen", layout="centered", page_icon="🕸️")
+# Set page config
+st.set_page_config(page_title="NetArch-AutoGen", page_icon="🛠️", layout="centered")
 
-st.markdown(
-    """
-    <h1 style='text-align: center;'>🕸️ NetArch-AutoGen</h1>
-    <p style='text-align: center;'>Upload your network config and instantly generate beautiful architecture diagrams!</p>
-    """, unsafe_allow_html=True
+# --- Sidebar (Dark mode + Sample download) ---
+st.sidebar.title("⚙️ Settings")
+dark_mode = st.sidebar.toggle("🌙 Dark Mode", value=True)
+st.sidebar.markdown("### 🧪 Sample Config")
+st.sidebar.download_button(
+    label="📄 Download Sample YAML",
+    data=open("sample.yaml", "rb").read(),
+    file_name="sample.yaml",
+    mime="text/yaml"
 )
 
-st.divider()
+# Apply dark theme (via Streamlit themes)
+if dark_mode:
+    st.markdown(
+        """
+        <style>
+            body { color: white; background-color: #0e1117; }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-with st.expander("📘 How to use this tool"):
-    st.markdown("""
-    - Upload a `.yaml`, `.yml`, or `.json` configuration file.
-    - The file should follow the supported schema (check [sample here](https://github.com/YOUR_REPO/sample.yaml)).
-    - Once processed, your diagram will appear below with a download option.
-    """)
+# --- Title and Intro ---
+st.markdown("<h1 style='text-align: center;'>NetArch-AutoGen 🖼️</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Upload your network config and auto-generate diagrams!</p>", unsafe_allow_html=True)
 
-uploaded_file = st.file_uploader("📤 Upload your YAML or JSON config file", type=['yaml', 'yml', 'json'])
+# --- File Uploader ---
+st.markdown("### 📤 Upload your YAML or JSON config file")
+uploaded_file = st.file_uploader(
+    label="Drag & drop or browse",
+    type=['yaml', 'yml', 'json'],
+    label_visibility="collapsed"
+)
 
+# --- Diagram Generator ---
 if uploaded_file:
-    with st.spinner("🛠️ Generating diagram..."):
-        try:
-            content = uploaded_file.read().decode("utf-8")
-            ext = os.path.splitext(uploaded_file.name)[1].lower()
+    try:
+        content = uploaded_file.read().decode("utf-8")
+        file_ext = os.path.splitext(uploaded_file.name)[1].lower()
 
-            if ext == ".json":
-                data = json.loads(content)
-            else:
-                data = yaml.safe_load(content)
+        # Parse content
+        data = json.loads(content) if file_ext == ".json" else yaml.safe_load(content)
 
-            # Create a unique filename based on timestamp
-            filename_base = os.path.splitext(uploaded_file.name)[0]
-            timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-            output_filename = f"outputs/{filename_base}_{timestamp}"
+        # Generate diagram
+        filename_base = os.path.splitext(uploaded_file.name)[0]
+        output_path = generate_diagram_from_yaml(data, filename=f"outputs/{filename_base}")
 
-            output_path = generate_diagram_from_yaml(data, filename=output_filename)
+        st.success("✅ Diagram generated successfully!")
+        st.image(output_path, caption="🖼️ Generated Diagram", use_container_width=True)
 
-            if output_path and os.path.exists(output_path):
-                st.success("✅ Diagram generated successfully!")
-                st.image(output_path, caption="🖼️ Your Generated Diagram", use_container_width=True)
-                with open(output_path, "rb") as img_file:
-                    st.download_button(
-                        label="📥 Download Diagram",
-                        data=img_file,
-                        file_name=f"{filename_base}.png",
-                        mime="image/png"
-                    )
-            else:
-                st.warning("⚠️ Diagram file not found after generation.")
-
-        except Exception as e:
-            st.error(f"❌ Failed to generate diagram: `{e}`")
+    except Exception as e:
+        st.error(f"❌ Failed to generate diagram:\n`{e}`")
 
 else:
-    st.info("📂 Please upload a config file to begin.")
+    st.info("Upload a `.yaml`, `.yml`, or `.json` file to get started.")
+
+# Footer
+st.markdown("---")
+st.markdown(
+    "<small>Made with ❤️ by ird1natris • NetArch-AutoGen • Secure your network visually</small>",
+    unsafe_allow_html=True
+)
