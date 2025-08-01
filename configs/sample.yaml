@@ -1,13 +1,33 @@
-title: Sample Network
+title: Sample Network Architecture
+
 resources:
+  - name: InternetGateway
+    type: internet_gateway
+
+  - name: LoadBalancer
+    type: elb
+
   - name: WebServer1
     type: ec2
-  - name: LoadBalancer1
-    type: elb
-  - name: DB1
+
+  - name: WebServer2
+    type: ec2
+
+  - name: Database
     type: rds
+
 connections:
-  - from: LoadBalancer1
+  - from: InternetGateway
+    to: LoadBalancer
+
+  - from: LoadBalancer
     to: WebServer1
+
+  - from: LoadBalancer
+    to: WebServer2
+
   - from: WebServer1
-    to: DB1
+    to: Database
+
+  - from: WebServer2
+    to: Database
