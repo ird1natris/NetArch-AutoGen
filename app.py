@@ -61,6 +61,6 @@ else:
 # Footer
 st.markdown("---")
 st.markdown(
-    "<small>Made with ❤️ by ird1natris • NetArch-AutoGen • Secure your network visually</small>",
+    "<small>Made with ❤️ by ird1natris</small>",
     unsafe_allow_html=True
 )
