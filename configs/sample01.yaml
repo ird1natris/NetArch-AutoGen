@@ -1,7 +1,5 @@
 multi_cloud_network_architecture:
-  description: >
-    Reference architecture for secure multi-cloud connectivity between AWS, Azure, and GCP.
-    Includes hub-and-spoke topology, shared services, security controls, and interconnects.
+  description: "Reference architecture for secure multi-cloud connectivity between AWS, Azure, and GCP. Includes hub-and-spoke topology, shared services, security controls, and interconnects."
   
   clouds:
     - name: AWS
@@ -20,6 +18,7 @@ multi_cloud_network_architecture:
             transit_gateway: aws-tgw
             vpn_gateway: aws-vpn-gw
             firewall: aws-network-firewall
+
     - name: Azure
       region: southeastasia
       vnets:
@@ -34,6 +33,7 @@ multi_cloud_network_architecture:
             virtual_hub: azure-virtual-wan-hub
             firewall: azure-firewall
             vpn_gateway: azure-vpn-gw
+
     - name: GCP
       region: asia-southeast1
       vpcs:
@@ -72,20 +72,20 @@ multi_cloud_network_architecture:
         linked_to: aws-direct-connect
   
   security_controls:
-    - centralized_firewalls:
-        aws: aws-network-firewall
-        azure: azure-firewall
-        gcp: gcp-firewall
-    - zero_trust_network_access:
-        identity_provider: shared-iam
-        policies:
-          - least_privilege
-          - device_trust
-    - logging_monitoring:
-        aws: cloudwatch
-        azure: log-analytics
-        gcp: stackdriver
-        centralized_collector: siem-splunk
+    centralized_firewalls:
+      aws: aws-network-firewall
+      azure: azure-firewall
+      gcp: gcp-firewall
+    zero_trust_network_access:
+      identity_provider: shared-iam
+      policies:
+        - least_privilege
+        - device_trust
+    logging_monitoring:
+      aws: cloudwatch
+      azure: log-analytics
+      gcp: stackdriver
+      centralized_collector: siem-splunk
   
   dns_resolution:
     strategy: hybrid-dns
