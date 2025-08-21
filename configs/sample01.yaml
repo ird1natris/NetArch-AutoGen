@@ -1,102 +1,34 @@
-multi_cloud_network_architecture:
-  description: "Reference architecture for secure multi-cloud connectivity between AWS, Azure, and GCP. Includes hub-and-spoke topology, shared services, security controls, and interconnects."
-  
-  clouds:
-    - name: AWS
-      region: ap-southeast-1
-      vpcs:
-        - name: aws-hub-vpc
-          cidr: 10.10.0.0/16
-          subnets:
-            public:
-              - 10.10.1.0/24
-              - 10.10.2.0/24
-            private:
-              - 10.10.10.0/24
-              - 10.10.11.0/24
-          components:
-            transit_gateway: aws-tgw
-            vpn_gateway: aws-vpn-gw
-            firewall: aws-network-firewall
+multi_cloud_network:
+  aws:
+    region: ap-southeast-1
+    vpc: 10.10.0.0/16
+    subnets:
+      - 10.10.1.0/24
+      - 10.10.2.0/24
+  azure:
+    region: southeastasia
+    vnet: 10.20.0.0/16
+    subnets:
+      - 10.20.1.0/24
+      - 10.20.10.0/24
+  gcp:
+    region: asia-southeast1
+    vpc: 10.30.0.0/16
+    subnets:
+      - 10.30.1.0/24
+      - 10.30.10.0/24
 
-    - name: Azure
-      region: southeastasia
-      vnets:
-        - name: azure-hub-vnet
-          cidr: 10.20.0.0/16
-          subnets:
-            dmz:
-              - 10.20.1.0/24
-            workload:
-              - 10.20.10.0/24
-          components:
-            virtual_hub: azure-virtual-wan-hub
-            firewall: azure-firewall
-            vpn_gateway: azure-vpn-gw
+connectivity:
+  - aws <-> azure: ipsec-vpn
+  - aws <-> gcp: ipsec-vpn
+  - azure <-> gcp: ipsec-vpn
 
-    - name: GCP
-      region: asia-southeast1
-      vpcs:
-        - name: gcp-hub-vpc
-          cidr: 10.30.0.0/16
-          subnets:
-            services:
-              - 10.30.1.0/24
-            workloads:
-              - 10.30.10.0/24
-          components:
-            cloud_router: gcp-cloud-router
-            cloud_nat: gcp-cloud-nat
-            firewall: gcp-firewall
-  
-  connectivity:
-    interconnects:
-      - type: ipsec-vpn
-        endpoints:
-          - aws-vpn-gw
-          - azure-vpn-gw
-      - type: ipsec-vpn
-        endpoints:
-          - aws-vpn-gw
-          - gcp-cloud-router
-      - type: ipsec-vpn
-        endpoints:
-          - azure-vpn-gw
-          - gcp-cloud-router
-    optional:
-      - type: direct-connect
-        provider: aws
-        linked_to: azure-expressroute
-      - type: interconnect
-        provider: gcp
-        linked_to: aws-direct-connect
-  
-  security_controls:
-    centralized_firewalls:
-      aws: aws-network-firewall
-      azure: azure-firewall
-      gcp: gcp-firewall
-    zero_trust_network_access:
-      identity_provider: shared-iam
-      policies:
-        - least_privilege
-        - device_trust
-    logging_monitoring:
-      aws: cloudwatch
-      azure: log-analytics
-      gcp: stackdriver
-      centralized_collector: siem-splunk
-  
-  dns_resolution:
-    strategy: hybrid-dns
-    providers:
-      - aws-route53
-      - azure-private-dns
-      - gcp-cloud-dns
-    forwarding_rules:
-      - from: aws-route53
-        to: azure-private-dns
-      - from: azure-private-dns
-        to: gcp-cloud-dns
-      - from: gcp-cloud-dns
-        to: aws-route53
+security_controls:
+  - centralized_firewalls
+  - zero_trust_network_access
+  - logging_and_monitoring
+
+dns:
+  - aws-route53
+  - azure-private-dns
+  - gcp-cloud-dns
