@@ -1,34 +1,31 @@
-multi_cloud_network:
-  aws:
-    region: ap-southeast-1
-    vpc: 10.10.0.0/16
-    subnets:
-      - 10.10.1.0/24
-      - 10.10.2.0/24
-  azure:
-    region: southeastasia
-    vnet: 10.20.0.0/16
-    subnets:
-      - 10.20.1.0/24
-      - 10.20.10.0/24
-  gcp:
-    region: asia-southeast1
-    vpc: 10.30.0.0/16
-    subnets:
-      - 10.30.1.0/24
-      - 10.30.10.0/24
+nodes:
+  - id: aws
+    label: AWS Cloud
+    shape: cloud
+  - id: azure
+    label: Azure Cloud
+    shape: cloud
+  - id: gcp
+    label: GCP Cloud
+    shape: cloud
 
-connectivity:
-  - aws <-> azure: ipsec-vpn
-  - aws <-> gcp: ipsec-vpn
-  - azure <-> gcp: ipsec-vpn
+  - id: aws-vpc
+    label: AWS VPC (10.10.0.0/16)
+    parent: aws
+  - id: azure-vnet
+    label: Azure VNet (10.20.0.0/16)
+    parent: azure
+  - id: gcp-vpc
+    label: GCP VPC (10.30.0.0/16)
+    parent: gcp
 
-security_controls:
-  - centralized_firewalls
-  - zero_trust_network_access
-  - logging_and_monitoring
-
-dns:
-  - aws-route53
-  - azure-private-dns
-  - gcp-cloud-dns
+edges:
+  - from: aws-vpc
+    to: azure-vnet
+    label: IPSec VPN
+  - from: aws-vpc
+    to: gcp-vpc
+    label: IPSec VPN
+  - from: azure-vnet
+    to: gcp-vpc
+    label: IPSec VPN
